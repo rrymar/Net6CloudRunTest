@@ -14,7 +14,7 @@ namespace Net6Test.Pages
 
         public void OnGet()
         {
-
+            ViewData["Date"] = DateTime.UtcNow.ToString();
         }
     }
 }
