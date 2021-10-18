@@ -15,6 +15,10 @@ namespace Net6Test.Pages
         public void OnGet()
         {
             ViewData["Date"] = DateTime.UtcNow.ToString();
+            if (Request.QueryString.Value?.Contains("error") == true)
+            {
+                throw new Exception("Some error appears");
+            }
         }
     }
 }
