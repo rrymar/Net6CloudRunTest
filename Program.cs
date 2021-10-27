@@ -32,8 +32,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 
 
-    app.UseGoogleExceptionLogging();
-    app.UseGoogleTrace();
+    //app.UseGoogleExceptionLogging();
+    //app.UseGoogleTrace();
 }
 
 //app.UseHttpsRedirection();
