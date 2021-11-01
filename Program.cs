@@ -1,4 +1,6 @@
 using Google.Cloud.Diagnostics.AspNetCore3;
+using Microsoft.AspNetCore.Mvc;
+using Net6Test;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,9 @@ string url = String.Concat("http://0.0.0.0:", port);
 // comment if using app engine
 builder.WebHost.UseUrls(url);
 
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -39,10 +44,19 @@ if (!app.Environment.IsDevelopment())
 //app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSwagger(c=> c.SerializeAsV2 = true);
+app.UseSwaggerUI();
+
 app.UseRouting();
 
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.MapGet("some", ([FromQuery]string arg) => new Result()
+{
+    Date = DateTime.UtcNow,
+    Message = arg
+});
 
 app.Run();
